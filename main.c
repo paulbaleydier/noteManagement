@@ -58,7 +58,7 @@ int main(){
         scanf("%lf", &cache_note);
 
         // Si note saisie est valide
-        if (((cache_note < 1) && (((int) (cache_note * 100) % 25) != 0))) {
+        if (((cache_note < 1) && (((int) (cache_note * 100) % 25) == 0))) {
           break;
         }
 
