@@ -36,7 +36,7 @@ int main(){
 
     
     
-
+    /*
     for (int i = 0; i < total_critere; i++) {
       printf("%s avec un coef de %d\n", critere[i].nameCritere, critere[i].coef);
       printf("Donne moi une note : \n");
@@ -49,6 +49,27 @@ int main(){
       i--;
       continue;
     }
+    */
+    
+    for (int i = 0; i < total_critere; i++) {
+      printf("%s avec un coef de %d\n", critere[i].nameCritere, critere[i].coef);
+      while (1) {
+        printf("Donne moi une note : \n");
+        scanf("%lf", &cache_note);
+
+        // Si note saisie est valide
+        if (((cache_note < 1) && (((int) (cache_note * 100) % 25) != 0))) {
+          break;
+        }
+
+        // Si la note saisie par l'utilisateur n'est pas valide, affiche un message d'erreur
+        printf("Vous avez le choix entre 0, 0.25, 0.5, 0.75 et 1");
+      }
+
+      // Enregistre la note valide dans la structure Critere
+      critere[i].note = cache_note;
+    }
+
 
    
 
