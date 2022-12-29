@@ -1,89 +1,98 @@
 #include <stdio.h>
 #include "string.h"
 
+
+
+// Création d'une structure Critere 
 struct Critere {
   char nameCritere[100];
   int coef;
   double note;
 };
 
+// Variable qui donne le nombre de critere
+int total_critere = 3;
+
+// Stockage de critere dans une list
 struct Critere critere[3] = {
   {"Premier critère", 1, 0},
   {"2 critere", 2, 0},
   {"3 critere", 3, 0}
 };
 
-int total_critere = 3;
 
+// function principal d'un programme C
 int main(){
+  // Initialisation des variables
   char prenom[20];
   char nom[20];
   double total_note = 0.0;
   double total_coef_note = 0.0;
-  double moyenne = 0.0;
+  double note_final = 0.0;
   double cache_note = 0.0;
 
-  printf("Bienvenue dans le gestionnaire de note : \n");
+  printf("<-- Bienvenue dans le gestionnaire de notes --> \n");
 
+  // Lancement de la boucle tant que 'FIN' n'est pas écrit."
   do {
     // Demande le prenom
-    printf("Donne moi le prenom : \n");
+    printf("Donne moi le prenom de l'élève : ");
     scanf("%s", prenom);
 
     // Demande le nom
-    printf("Donne moi le nom : \n");
+    printf("\nDonne moi le nom de l'élève : ");
     scanf("%s", nom);
-
     
-    
-    /*
-    for (int i = 0; i < total_critere; i++) {
-      printf("%s avec un coef de %d\n", critere[i].nameCritere, critere[i].coef);
-      printf("Donne moi une note : \n");
-      scanf("%lf", &cache_note);
-      if((cache_note < 1) && (((int) (cache_note * 100) % 25) != 0)){
-        printf("Vous avez le choix entre 0, 0.25, 0.5, 0.75 et 1");
-        critere[i].note = cache_note;
-        continue;
-      }
-      i--;
-      continue;
-    }
-    */
+    // Lancement de la boucle qui demande la notation des critères
     
     for (int i = 0; i < total_critere; i++) {
-      printf("%s avec un coef de %d\n", critere[i].nameCritere, critere[i].coef);
+        
+      printf("\nDonne une note pour le critère : \n %s \n Avec un coefficient de : %d\n", critere[i].nameCritere, critere[i].coef);
+      
+      // Lancement de la boucle tant que la note saisie n'est pas correcte
       while (1) {
-        printf("Donne moi une note : \n");
-        scanf("%lf", &cache_note);
+        printf("Donner une note entre 0 et 1 par tranches de 0.25 : \n");
+        
+        if(scanf("%lf", &cache_note) != 1){
+            printf("Vous vous êtes trompé dans la notation, utilisez bien un nombre !\n");
+            
+            // Ces deux lignes permettent de vider le tampon d'entrée
+            char buffer[100];
+            fgets(buffer, 100, stdin);
+        
+            continue;
+        }
 
-        // Si note saisie est valide
+        // Si la note saisie est valide
         if (((cache_note < 1) && (((int) (cache_note * 100) % 25) == 0))) {
           break;
         }
 
-        // Si la note saisie par l'utilisateur n'est pas valide, affiche un message d'erreur
-        printf("Vous avez le choix entre 0, 0.25, 0.5, 0.75 et 1");
+        // sinon, message d'erreur
+        printf("Vous avez le choix entre 0, 0.25, 0.5, 0.75 et 1\n");
       }
 
-      // Enregistre la note valide dans la structure Critere
+      // Enregistre la note valide dans la structure Critère
       critere[i].note = cache_note;
     }
 
 
    
-
+   // Calcule de la note final 
    for (int i = 0; i < total_critere; i++) {
       total_note += critere[i].note * critere[i].coef;
       total_coef_note += critere[i].coef;
    }
-  
-  moyenne = (total_note / total_coef_note) * 20;
-
-  printf("La note est de %lf", moyenne);
-
+  // Calcule de la note final
+  note_final = (total_note / total_coef_note) * 20;
+    
+  printf("\n<---   Fin de la notation   --->\n\n");
+  printf("\tPrénom : %s\n", prenom);
+  printf("\tNom : %s\n", nom);
+  printf("\tnote final : %.2lf/20\n", note_final);
+  printf("\t(La note à été formaté à .00 !)\n");
+  printf("\n<---           ()           --->\n");
   }while (strcmp(prenom, "FIN") == 1);
 
 }
-
 
