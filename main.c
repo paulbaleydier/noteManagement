@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "string.h"
 
+// Variable qui donne le nombre de critere
+#define T_CRITERE 3
+
 
 
 // Création d'une structure Critere 
@@ -10,11 +13,9 @@ struct Critere {
   double note;
 };
 
-// Variable qui donne le nombre de critere
-int total_critere = 3;
 
 // Stockage de critere dans une list
-struct Critere critere[3] = {
+struct Critere critere[T_CRITERE] = {
   {"Premier critère", 1, 0},
   {"2 critere", 2, 0},
   {"3 critere", 3, 0}
@@ -45,7 +46,7 @@ int main(){
     
     // Lancement de la boucle qui demande la notation des critères
     
-    for (int i = 0; i < total_critere; i++) {
+    for (int i = 0; i < T_CRITERE; i++) {
         
       printf("\nDonne une note pour le critère : \n %s \n Avec un coefficient de : %d\n", critere[i].nameCritere, critere[i].coef);
       
@@ -79,7 +80,7 @@ int main(){
 
    
    // Calcule de la note final 
-   for (int i = 0; i < total_critere; i++) {
+   for (int i = 0; i < T_CRITERE; i++) {
       total_note += critere[i].note * critere[i].coef;
       total_coef_note += critere[i].coef;
    }
